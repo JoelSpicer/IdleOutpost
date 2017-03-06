@@ -8,5 +8,32 @@
     android:background="#d4d4d4"
     tools:context="com.joelspicer.idleoutpost.GameActivity">
 
+    <TextView
+        android:id="@+id/dotsView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="0 Dots"
+        android:textSize="25sp"
+        android:textColor="#000000"
+
+        />
+
+    <Button
+        android:id="@+id/dotBtn"
+        android:layout_width="150dp"
+        android:minWidth="150dp"
+        android:maxWidth="150dp"
+        android:layout_height="150dp"
+        android:minHeight="150dp"
+        android:maxHeight="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/dot"
+        android:onClick="dotBtn"
+     />
 
 </RelativeLayout>
