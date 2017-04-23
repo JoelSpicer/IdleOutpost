@@ -79,7 +79,7 @@ public class GameActivity extends FragmentActivity {
 
         dollarBtn = (ImageButton) findViewById(R.id.dollarBtn);
         shopDpcBtn = (Button) findViewById(R.id.shopDpc);
-        shopDpcBtn.setText("Dpc: x2 | Price: " + shopDpc);
+        shopDpcBtn.setText("Dpc: +1 | Price: " + shopDpc);
 
         shopDpsBtn = (Button) findViewById(R.id.shopDps);
         shopDpsBtn.setText("Dps: +1 | Price: " + shopDps);
@@ -91,9 +91,9 @@ public class GameActivity extends FragmentActivity {
     public void shopDpc(View v) {
         if (dollar >= shopDpc) {
             dollar -= shopDpc;
-            dpc *= 2;
+            dpc += 1;
             shopDpc *= 1.5;
-            shopDpcBtn.setText("Dpc: x2 | Price: " + shopDpc);
+            shopDpcBtn.setText("Dpc: +1 | Price: " + shopDpc);
             dpsAndDpcView.setText(dps + "dps | " + dpc + " dpc");
             dollarsView.setText(dollar + " dollars");
             savePref(shopDpcKeyString, shopDpc);
@@ -118,7 +118,7 @@ public class GameActivity extends FragmentActivity {
 
 
         } else {
-            Toast.makeText(this, "You need more dollars!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You need more money!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -138,7 +138,7 @@ public class GameActivity extends FragmentActivity {
         long shopDpsKey = sharedPref.getLong(shopDpsKeyString, 10);
         shopDps = shopDpsKey;
 
-        long shopDpcKey = sharedPref.getLong(shopDpsKeyString, 1000);
+        long shopDpcKey = sharedPref.getLong(shopDpsKeyString, 10);
         shopDpc = shopDpcKey;
     }
 

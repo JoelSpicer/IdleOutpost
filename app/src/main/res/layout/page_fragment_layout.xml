@@ -5,13 +5,34 @@
     tools:context="com.joelspicer.idleoutpost.PageFragment">
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        android:layout_alignParentTop="true"
+    <ImageButton
+        android:id="@+id/dollarBtn"
+        android:layout_width="300dp"
+        android:layout_height="396dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="162dp"
-        android:text="TextView" />
+        android:layout_centerVertical="true"
+        android:src="@drawable/tap1"
+        android:maxHeight="396dp"
+        android:maxWidth="300dp"
+        android:minHeight="396dp"
+        android:minWidth="300dp"
+        android:onClick="dollarBtn"
+        android:background="@null"
+        />
+    <TextView
+        android:id="@+id/swipetext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="0 dps | 1 dpc"
+        android:textColor="#000000"
+        android:textSize="15sp"
+
+        />
+
+
+
+
 </RelativeLayout>
