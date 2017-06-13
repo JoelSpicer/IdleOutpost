@@ -30,6 +30,37 @@
 
         />
 
+    <ImageButton
+        android:id="@+id/dollarBtn"
+        android:layout_width="300dp"
+        android:layout_height="396dp"
+        android:src="@drawable/tap1"
+        android:maxHeight="396dp"
+        android:maxWidth="300dp"
+        android:minHeight="396dp"
+        android:minWidth="300dp"
+        android:onClick="dollarBtn"
+        android:background="@null"
+        android:layout_below="@+id/dpsAndDpcView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp" />
+
+    <ImageButton
+        android:id="@+id/bonusBtn"
+        android:layout_width="55dp"
+        android:layout_height="75dp"
+        android:src="@drawable/bonus"
+        android:maxHeight="75dp"
+        android:maxWidth="55dp"
+        android:minHeight="75dp"
+        android:minWidth="55dp"
+        android:onClick="bonusBtn"
+        android:background="@null"
+        android:layout_below="@+id/dpsAndDpcView"
+        android:layout_alignRight="@+id/dollarBtn"
+        android:layout_alignEnd="@+id/dollarBtn"
+        android:layout_marginTop="44dp" />
+
     <TextView
         android:id="@+id/dpsAndDpcView"
         android:layout_width="fill_parent"
@@ -57,6 +88,7 @@
         android:textColor="#000000"
         android:textSize="20sp" />
 
+
     <Button
         android:id="@+id/shopDpc"
         android:layout_width="fill_parent"
@@ -71,6 +103,22 @@
         android:textSize="20sp"
 
         />
+
+    <Button
+        android:id="@+id/shopDpb"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/shopDpc"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:maxLines="1"
+        android:onClick="shopDpb"
+        android:text="Dpb: +1 | Price: 100"
+        android:textColor="#000000"
+        android:textSize="20sp"
+
+        />
+
 
 
 

@@ -1,19 +1,21 @@
 package com.joelspicer.idleoutpost;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.app.Activity;
+        import android.content.SharedPreferences;
+        import android.media.MediaPlayer;
+        import android.os.Bundle;
+        import android.preference.PreferenceManager;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.ImageButton;
+        import android.widget.TextView;
+        import android.widget.Toast;
+
+        import static android.R.attr.button;
+        import static com.joelspicer.idleoutpost.R.id.shopDpb;
 
 
-public class GameActivity extends FragmentActivity {
+public class GameActivity extends Activity {
 
     //values
     public long dollar;
@@ -22,27 +24,31 @@ public class GameActivity extends FragmentActivity {
     public String dpcKeyString = "dpc";
     public long dps;
     public String dpsKeyString = "dps";
+    public long dpb;
+    public String dpbKeyString = "dpb";
     public long shopDpc;
     public String shopDpcKeyString = "ShopDpc";
     public long shopDps;
     public String shopDpsKeyString = "ShopDps";
+    public long shopDpb;
+    public String shopDpbKeyString = "ShopDpb";
 
     //views
     public TextView dollarsView;
     public TextView dpsAndDpcView;
     public ImageButton dollarBtn;
+    public ImageButton bonusBtn;
     public Button shopDpcBtn;
     public Button shopDpsBtn;
-    ViewPager viewPager;
+    public Button shopDpbBtn;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        viewPager = (ViewPager)findViewById(R.id.view_pager);
-        SwipeAdapter swipeAdapter = new SwipeAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(swipeAdapter);
+
+
         loadPref();
         initialize();
 
@@ -67,6 +73,8 @@ public class GameActivity extends FragmentActivity {
             }
         };
         thread.start();
+
+
     }
 
     public void initialize() {
@@ -75,14 +83,21 @@ public class GameActivity extends FragmentActivity {
         dollarsView.setText(dollar + " dollars");
 
         dpsAndDpcView = (TextView) findViewById(R.id.dpsAndDpcView);
-        dpsAndDpcView.setText(dps + "dps | " + dpc + " dpc");
+        dpsAndDpcView.setText(dps + "dps | " + dpc + " dpc | " + dpb + " dpb");
 
         dollarBtn = (ImageButton) findViewById(R.id.dollarBtn);
         shopDpcBtn = (Button) findViewById(R.id.shopDpc);
         shopDpcBtn.setText("Dpc: +1 | Price: " + shopDpc);
 
+
+        bonusBtn = (ImageButton)findViewById(R.id.bonusBtn);
+
         shopDpsBtn = (Button) findViewById(R.id.shopDps);
         shopDpsBtn.setText("Dps: +1 | Price: " + shopDps);
+
+        shopDpbBtn = (Button) findViewById(R.id.shopDpb);
+        shopDpbBtn.setText("Dpb: +10 | Price: " + shopDpb);
+
 
 
     }
@@ -94,7 +109,7 @@ public class GameActivity extends FragmentActivity {
             dpc += 1;
             shopDpc *= 1.5;
             shopDpcBtn.setText("Dpc: +1 | Price: " + shopDpc);
-            dpsAndDpcView.setText(dps + "dps | " + dpc + " dpc");
+            dpsAndDpcView.setText(dps + "dps | " + dpc + " dpc | " + dpb + " dpb");
             dollarsView.setText(dollar + " dollars");
             savePref(shopDpcKeyString, shopDpc);
             savePref(dpcKeyString, dpc);
@@ -110,7 +125,7 @@ public class GameActivity extends FragmentActivity {
             dps += 1;
             shopDps *= 1.5;
             shopDpsBtn.setText("Dps: +1 | Price: " + shopDps);
-            dpsAndDpcView.setText(dps + " dps | " + dpc + " dpc");
+            dpsAndDpcView.setText(dps + "dps | " + dpc + " dpc | " + dpb + " dpb");
             dollarsView.setText(dollar + " dollars");
             savePref(shopDpsKeyString, shopDps);
             savePref(dpsKeyString, dps);
@@ -118,7 +133,25 @@ public class GameActivity extends FragmentActivity {
 
 
         } else {
-            Toast.makeText(this, "You need more money!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You need more dollars!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void shopDpb(View v) {
+        if (dollar >= shopDpb) {
+            dollar -= shopDpb;
+            dpb += 10;
+            shopDpb *= 1.5;
+            shopDpbBtn.setText("Dpb: +10 | Price: " + shopDpb);
+            dpsAndDpcView.setText(dps + "dps | " + dpc + " dpc | " + dpb + " dpb");
+            dollarsView.setText(dollar + " dollars");
+            savePref(shopDpbKeyString, shopDpb);
+            savePref(dpbKeyString, dpb);
+            savePref(dollarKeyString, dollar);
+
+
+        } else {
+            Toast.makeText(this, "You need more dollars!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -135,11 +168,18 @@ public class GameActivity extends FragmentActivity {
         long dpsKey = sharedPref.getLong(dpsKeyString, 0);
         dps = dpsKey;
 
+        long dpbKey = sharedPref.getLong(dpbKeyString, 10);
+        dps = dpbKey;
+
         long shopDpsKey = sharedPref.getLong(shopDpsKeyString, 10);
         shopDps = shopDpsKey;
 
-        long shopDpcKey = sharedPref.getLong(shopDpsKeyString, 10);
+        long shopDpcKey = sharedPref.getLong(shopDpcKeyString, 10);
         shopDpc = shopDpcKey;
+
+        long shopDpbKey = sharedPref.getLong(shopDpbKeyString, 100);
+        shopDpb = shopDpbKey;
+
     }
 
     public void savePref(String key, long value) {
@@ -157,4 +197,12 @@ public class GameActivity extends FragmentActivity {
         savePref(dollarKeyString, dollar);
 
     }
+
+    public void bonusBtn(View v) {
+        dollar += dpb;
+        dollarsView.setText(dollar + " dollars");
+
+    }
+
+
 }
